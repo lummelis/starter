@@ -21,6 +21,7 @@ CSS TABLE OF CONTENTS
     # HEADER
         # LOGO
         # SITE NAV
+        # SITE-HEADER-ON-TOP-OF-HERO
     # MAIN
         # SECTIONS
             #HERO
@@ -62,9 +63,6 @@ CSS TABLE OF CONTENTS
     --color-sitefooter-text: rgb(255 255 255 / .8);
     --color-sitefooter-headings: rgb(255 255 255 / 1);
     --color-sitefooter-links: rgb(255 255 255);
-
-
-
 
 
 
@@ -113,26 +111,21 @@ a {
     &:hover {
         color: var(--color-links-darker);
     }
-
 }
 
 /* GLOBAL TYPOGRAPHY */
 
 body {
-
     /* SET THE FONT FOR ALL MAIN BODY TEXT */
     font-family: var(--font-body);
 
     /* SET THE LEADING (LINE-HEIGHT) FOR ALL BODY TEXT */
     line-height: 1.4;
-
 }
 
 h1, h2, h3 {
-
     /* SET THE FONT FOR ALL HEADINGS */
     font-family: var(--font-headings);
-
 }
 
 h1 {
@@ -168,7 +161,6 @@ p {
 
     /* NEW SCHOOL WIDOW SLAYER */
     text-wrap: pretty;
-
 }
 
 /* GLOBAL MEDIA */
@@ -242,6 +234,7 @@ body {
 }
 
 .row > * {
+    margin-top: var(--gridgap);
     margin-bottom: var(--gridgap);
 }
 
@@ -294,8 +287,6 @@ body {
     /* SWAP (REVERSE) WORKS ONLY w/ 2 CHILDREN */
     .row.swapped > *:first-child {order: 2}
     .row.swapped > *:last-child {order: 1}
-
-
 }
 
 
@@ -318,17 +309,9 @@ body {
     /* ADD SOME GENERAL SPACING/PADDING AROUND THE HEADER */
     padding: var(--unit-small);
 
-    /* RENDER HEADER ON TOP OF HERO */
-    @media (min-width: 768px) {
-    background-color: var(--color-siteheader-background);
 
-        position: absolute;
-        width: 100%;
-    }
-
-    /* REMOBE LINK UNDERLINES AND SET SITE HEADER LINK COLOR */
+    /* REMOVE LINK UNDERLINES AND SET SITE HEADER LINK COLOR */
     a {
-        color: var(--color-siteheader-links);
         text-decoration: none;
     }
 
@@ -336,6 +319,7 @@ body {
     .site-logo {
         display: flex;
         align-items: center;
+        justify-content: center;
         gap: 1em;
 
         /* REMOVE MARGINS AND RESIZE H1 INSIDE HEADER */
@@ -353,12 +337,9 @@ body {
             margin: 0;
             padding: 0;
             list-style: none;
-
-            /* DISPLAY CHILDREN SIDE-BY-SIDE ON LARGE SCREENS */
-            @media (min-width: 768px) {
-                display: flex;
-            }
-
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         /* MAKE SITE NAV LINKS BIG LIKE BUTTONS */
@@ -366,14 +347,37 @@ body {
             display: block;
             padding: var(--unit-small);
         }
-
     }
 
 }
 
-/* SITE MAIN */
-.site-main {
+/* PLACE SITE HEADER ON TOP OF HERO ON LARGE SCREEN */
+.site-header.on-top-of-hero {
+
+    @media (min-width: 768px) {
+
+    /* RENDER HEADER ON TOP OF HERO */
+        position: absolute;
+        width: 100%;
+
+    /* SET SITE HEADER LINK COLOR ON LARGE SCREENS */
+        a {
+            color: var(--color-siteheader-links);
+        }
+
+        & + .site-main > .hero {
+            /* ADD MORE SPACE ON TOP FOR THE ABSOUTE HEADER */
+            padding-top: calc(4em + var(--unit-large));
+        }
+    }
 }
+
+
+
+
+/* SITE MAIN */
+/* .site-main {
+} */
 
 /* SECTIONS */
 section {
@@ -384,10 +388,6 @@ section {
 .hero {
     background-color: var(--color-hero-background);
     color: var(--color-hero-text);
-
-
-    /* ADD MORE SPACE ON TOP FOR THE ABSOUTE HEADER */
-    padding-top: calc(4em + var(--unit-large));
 
     h1, h2, h3 {
         color: var(--color-hero-headings);
@@ -431,12 +431,12 @@ section {
     border: 1px solid var(--color-links-dark);
     background-color: var(--color-links-dark);
     color: white;
-/* ENABLE BOX MODEL SIZING */
+    
+    /* ENABLE BOX MODEL SIZING */
     display: inline-block;
     padding: var(--unit-small);
     margin: var(--unit-small) 0;
     
-
     /* GET RID OF THE UNDERLINE */
     text-decoration: none;
 
