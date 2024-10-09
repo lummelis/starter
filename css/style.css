@@ -617,6 +617,29 @@ section {
             border-color: var(--color-links-lighter);
             background-color: var(--color-links-lighter);
         }
+
+        &.light.alt2 {
+            border-color: var(--color-links-lighter);
+            background-color: transparent;
+            color: var(--color-links-light);
+
+            &.alt2:hover{
+                color: var(--color-links-darker);
+                background-color: var(--color-links-lighter);
+            }
+        }
+    }
+
+    /* ALT BUTTON VARIANT */
+    &.alt {
+        border-color: var(--color-links-darker);
+        background-color: var(--color-links-lighter);
+        color: var(--color-links-darker);
+
+        &:hover {
+            background-color: var(--color-links-darker);
+            color: var(--color-links-lighter);
+        }
     }
 }
 
